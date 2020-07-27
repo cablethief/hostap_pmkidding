@@ -12,7 +12,7 @@ addons:
 before_script:
 - git clone git://w1.fi/hostap.git
 - cp -r hostap/* $TRAVIS_BUILD_DIR
-- curl https://raw.githubusercontent.com/Cablethief/hostapd-mana/master/hostapd/.config -O $TRAVIS_BUILD_DIR/hostapd/.config
+- curl -o $TRAVIS_BUILD_DIR/hostapd/.config 'https://raw.githubusercontent.com/Cablethief/hostapd-mana/master/hostapd/.config' 
 - git apply give_pmkid.patch
 
 script:
