@@ -12,7 +12,7 @@ addons:
 
 before_script:
 - git clone git://w1.fi/hostap.git
-- cp -r hostap/* .
+- cp -r hostap/* $TRAVIS_BUILD_DIR
 - git apply give_pmkid.patch
 
 script:
