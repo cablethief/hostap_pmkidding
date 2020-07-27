@@ -11,7 +11,8 @@ addons:
     - libssl-dev
 
 before_script:
-- git clone git://w1.fi/hostap.git .
+- git clone git://w1.fi/hostap.git
+- cp hostap/* .
 - git apply give_pmkid.patch
 
 script:
