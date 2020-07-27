@@ -12,7 +12,7 @@ addons:
 
 before_script:
 - git clone git://w1.fi/hostap.git
-- cp hostap/* .
+- cp -r hostap/* .
 - git apply give_pmkid.patch
 
 script:
