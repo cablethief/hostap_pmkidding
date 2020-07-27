@@ -1,0 +1,34 @@
+language: c
+compiler:
+- clang
+- gcc
+
+dist: xenial
+addons:
+  apt:
+    packages:
+    - libnl-genl-3-dev
+    - libssl-dev
+
+before_script:
+- git clone git://w1.fi/hostap.git .
+- git apply give_pmkid.patch
+
+script:
+- make -C hostapd
+
+before_deploy:
+- tar -zcf hostapd-mana.tar.gz hostapd/hostapd hostapd/hostapd_cli
+
+deploy:
+  provider: releases
+  api_key:
+    secure: Hg5m57uLvDx7xXUzJm4PrFEuBy0xnfZE3rr+qN+NJwmQgQBpWRg3IeIvScTw2Cnvi0ah+EodIf1z/HMl27Ahw+doihg1YaGkYLRuuEmACX2UkDjpm0kX4yic4A/9lWGzLwZ1toeEbrMmKSNfrg5H2cMN/2Zbwbd/RPS9vD1H3XpC/Y/f3i3FiW3KP+vH1iUyXxnT3tnollKdbXBHQOkENQK6zzBS4akrw5qGIHmEAI5T/Nxw8pn4dnRSqqfjnRp/Fd3LJ6MsfX1pvjJ8adgKthGX6Zz0BaxzFVef9vVHm+u6Cfzht+aHMCf5Trb3ummpwwbAknvSyRkTTCmP7dGrDkCa9nFbBQf4UIlRU82gzQYCk6hX/ilyZyRkGx/DwqEqMDscsQrTuDV3cMZ4DuRgQkiNG5bLQ1Dvs1fQXQOwZUvWhLySWG/1mMfozqKQjXJRJNfnTEigrU+OrFS4yIT3VkyRXk/d39xsKtu4GACoBEw6TDRGWDMNGTWQseAIe8ssCFl8mks08uqBFyRMXv+fTE9B+h28lv6NDfRlXsgt7rXqFHBFXx9oE+WDVfORUHe47Ppw5FBlkpAVWogOEJw9VvJP0dNbCCL7p+TA88kbyvga6+jiFA5LUM8x0Ta9nHKKENSCgHf/DM99lsGmgcy+QVEBnYQWYd2vTjj3l7ribTg=
+  file: hostap.tar.gz
+  on:
+    repo: Cablethief/hostap_pmkidding
+    condition: "$CC = gcc"
+    branch: master
+  skip_cleanup: 'true'
+  overwrite: true
+  prerelease: true
