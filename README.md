@@ -1,6 +1,12 @@
 # hostap_pmkidding
 A patch to make Hostap return a PMKID so it can be cracked. 
 
+If you use your own `.config` file when building make sure you enable roaming support by uncommenting the IEEE80211R line.  
+
+```
+#CONFIG_IEEE80211R=y
+```
+
 # Usage
 
 ```sh
